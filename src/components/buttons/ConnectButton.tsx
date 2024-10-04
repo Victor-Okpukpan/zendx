@@ -6,17 +6,17 @@ export default function ConnectButton() {
   const { address, isConnected } = useWeb3ModalAccount();
 
   function truncateAddress(address: any) {
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+    return `${address.slice(0, 4)}...${address.slice(-4)}`;
   }
 
   return (
     <button
-      className="text-center text-xs border"
+      className="bg-[#080065] flex items-center gap-1 rounded-[56px] text-white font-medium text-sm py-[10px] px-6"
       onClick={() => {
         isConnected ? open({ view: "Account" }) : open({ view: "Connect" });
       }}
     >
-      {isConnected ? <>{truncateAddress(address)}</> : "Connect wallet"}
+      {isConnected ? <>{truncateAddress(address)}</> : "Connect"}
     </button>
   );
 }

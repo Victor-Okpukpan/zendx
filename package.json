@@ -11,14 +11,18 @@
   "dependencies": {
     "@coinbase/cbpay-js": "^2.2.1",
     "@coinbase/onchainkit": "^0.33.3",
+    "@rainbow-me/rainbowkit": "^2.1.7",
+    "@squirrel-labs/peanut-sdk": "^0.5.3",
     "@tanstack/react-query": "5.45.1",
     "@walletconnect/client": "^1.8.0",
     "@walletconnect/web3-provider": "^1.8.0",
     "@web3modal/ethers": "^5.1.10",
+    "axios": "^1.7.7",
     "ethers": "^6.13.3",
     "next": "14.2.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "viem": "latest",
     "wagmi": "latest"
   },
