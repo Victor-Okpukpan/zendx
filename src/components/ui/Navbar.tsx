@@ -17,7 +17,7 @@ export default function Navbar() {
           <div className="">
             <Image src={logo} alt="logo" width={116} height={36} />
           </div>
-          <div className="flex items-center bg-[#F1F3F4] border border-[#F8F8FA] rounded-[60px] py-[6px] px-[10px]">
+          <div className="hidden md:flex items-center bg-[#F1F3F4] border border-[#F8F8FA] rounded-[60px] py-[6px] px-[10px]">
             <button className="bg-[#080065] flex items-center gap-1 rounded-[56px] text-white font-medium text-sm py-[10px] px-6">
               <BsArrowBarLeft className="h-4 w-4" />
               <span>Send Crypto</span>
@@ -31,9 +31,6 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             {/* <SignupButton /> */}
             <LoginButton />
-            <button>
-              <CgMenuRight className="w-[38px] h-[38px] text-[#080065]" />
-            </button>
           </div>
         </div>
       </Wrapper>

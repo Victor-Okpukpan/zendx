@@ -36,7 +36,7 @@ export default function ClaimPage() {
 
   if (isUnclaimed) {
     return (
-      <main className="min-h-[90vh] w-full flex items-center justify-center">
+      <main className="min-h-[90vh] w-full flex items-center justify-center  px-4 md:px-0">
         <div className="">
         <h1 className="text-[#0C0D0E] font-semibold text-5xl text-center">
           This link has already
@@ -55,7 +55,7 @@ export default function ClaimPage() {
   }
 
   return (
-    <main className="min-h-[90vh] w-full flex items-center justify-center">
+    <main className="min-h-[90vh] w-full flex items-center justify-center px-4 md:px-0">
       {currentStep === 1 ? (
         <div>
           <h1 className="text-[#0C0D0E] font-semibold text-5xl text-center">
