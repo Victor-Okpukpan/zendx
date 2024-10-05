@@ -126,13 +126,13 @@ export default function SendToEmail() {
       <form className="border w-full max-w-[550px] border-[#DFE1E6] rounded-[10px] bg-white pt-[22px] pb-[55px] px-10">
         {currentStep === 1 ? (
           <>
-            <div className="text-right">
+            <div className="text-right mb-4">
               <PayWithCoinbaseButton />
             </div>
             <div className="mb-5">
               <label
                 htmlFor=""
-                className="text-[#667085] text-[8px] md:text-sm"
+                className="text-[#667085] text-xs md:text-sm"
               >
                 Recipient's email address.
               </label>
@@ -145,7 +145,7 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] text-[8px] text-sm">
+              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
                 Enter the amount of Base USDC you wish to send.
               </label>
               <div className="border border-[#DFE1E6] rounded-[10px] py-[14px] px-4 flex items-center">
@@ -197,27 +197,27 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="" className="text-[#667085] text-sm">
+              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
                 Recipient's email address.
               </label>
-              <p className="text-lg text-[#0C0D0E] font-semibold py-1">
+              <p className="md:text-lg text-[#0C0D0E] font-semibold py-1">
                 {email}
               </p>
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] text-sm">
+              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
                 You Sent
               </label>
               <div className="flex items-center gap-2">
-                <span className="text-lg text-[#0C0D0E] font-semibold py-1">
+                <span className="md:text-lg text-[#0C0D0E] font-semibold py-1">
                   {amount}
                 </span>
                 <Image src={usdc} width={26} height={26} alt="USDC" />
               </div>
             </div>
 
-            <p>
+            <p className="text-[#667085] text-xs md:text-sm">
               Estimated output: You will receive {amount} Base USDC, or the
               transaction will revert.
             </p>

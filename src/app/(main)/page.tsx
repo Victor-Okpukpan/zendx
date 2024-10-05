@@ -23,7 +23,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-full">
           <button
             onClick={() => router.push("/send")}
-            className="bg-[#080065] text-xs py-2 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
+            className="bg-[#080065] text-xs py-4 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
           >
             Send Crypto
           </button>

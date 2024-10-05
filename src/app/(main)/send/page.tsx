@@ -23,14 +23,14 @@ export default function SendPage() {
         <div className="flex items-center justify-center gap-4 w-full">
           <button
             onClick={() => router.push("/send/email")}
-            className="bg-[#080065] text-xs py-2 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
+            className="bg-[#080065] text-xs py-4 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
           >
             Email Address
           </button>
 
           <button
             onClick={() => router.push("/send/phone")}
-            className="bg-white py-2 text-xs px-6 md:py-5 md:px-14 font-medium md:text-base rounded-[20px] text-[#4D4B4B]"
+            className="bg-white py-4 text-xs px-6 md:py-5 md:px-14 font-medium md:text-base rounded-[20px] text-[#4D4B4B]"
           >
             Phone Number
           </button>
