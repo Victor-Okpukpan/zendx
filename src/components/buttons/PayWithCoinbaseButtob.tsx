@@ -5,7 +5,7 @@
 import { CBPayInstanceType, initOnRamp } from "@coinbase/cbpay-js";
 import { useEffect, useState } from "react";
 
-export const PayWithCoinbaseButton: React.FC = () => {
+export const PayWithCoinbaseButton = ({ destinationWalletAddress }: {destinationWalletAddress: `0x${string}` | undefined}) => {
   const [onrampInstance, setOnrampInstance] =
     useState<CBPayInstanceType | null>();
 
@@ -14,7 +14,12 @@ export const PayWithCoinbaseButton: React.FC = () => {
       {
         appId: "eb21c0ee-2f6b-4607-9f85-5aebbf39b4d8",
         widgetParameters: {
-          addresses: { "0x1": ["base"] },
+          destinationWallets: [
+            {
+              address: destinationWalletAddress!,
+              blockchains: ["base"],
+            },
+          ],
           assets: ["ETH", "USDC"],
         },
         onSuccess: () => {

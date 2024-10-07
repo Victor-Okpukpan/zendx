@@ -128,7 +128,7 @@ export default function SendToEmail() {
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
-              <PayWithCoinbaseButton />
+              <PayWithCoinbaseButton destinationWalletAddress={address} />
             </div>
             <div className="mb-5">
               <label
