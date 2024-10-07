@@ -12,18 +12,16 @@ import { useSendTransaction } from "wagmi";
 import { useEthersSigner } from "@/ethers";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 
-export default function SendToEmail() {
+export default function SendToPhone() {
   // const { address } = useWeb3ModalAccount();
   const { address } = useAccount();
   const signer = useEthersSigner();
   // const { walletProvider } = useWeb3ModalProvider();
   const [currentStep, setCurrentStep] = useState(1);
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
-  const { sendTransaction } = useSendTransaction();
-  console.log(link)
 
   function increaseStep(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -35,18 +33,12 @@ export default function SendToEmail() {
     setCurrentStep(1);
   }
 
-  function isCoinbaseWalletConnected() {
-    // Check if window.ethereum exists and if the provider is Coinbase Wallet
-    return window.ethereum?.isCoinbaseWallet || false;
-  }
-
   const sdk = new CoinbaseWalletSDK({
     appName: 'Zend',
   });
 
   async function createLink(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    
     // const provider = new ethers.providers.Web3Provider(window.ethereum);
     const provider = sdk.makeWeb3Provider();
     const web3Provider = new ethers.providers.Web3Provider(provider);
@@ -135,12 +127,12 @@ export default function SendToEmail() {
                 htmlFor=""
                 className="text-[#667085] text-xs md:text-sm"
               >
-                Recipient's email address.
+                Recipient's phone number.
               </label>
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="bg-transparent w-full text-xs md:text-lg text-[#667085] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
               />
             </div>
@@ -182,7 +174,7 @@ export default function SendToEmail() {
 
             <button
               onClick={increaseStep}
-              disabled={!email || amount === 0}
+              disabled={!phone || amount === 0}
               className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
             >
               Send
@@ -199,10 +191,10 @@ export default function SendToEmail() {
 
             <div className="mb-4">
               <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
-                Recipient's email address.
+                Recipient's phone number.
               </label>
               <p className="md:text-lg text-[#0C0D0E] font-semibold py-1">
-                {email}
+                {phone}
               </p>
             </div>
 

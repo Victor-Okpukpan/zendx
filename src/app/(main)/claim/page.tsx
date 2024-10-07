@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import peanut from "@squirrel-labs/peanut-sdk";
 import { useRouter } from "next/navigation";
+import { NEXT_PUBLIC_PEANUT_API_KEY } from "@/config";
 
 export default function ClaimPage() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function ClaimPage() {
     // const link = 'https://peanut.to/claim?c=137&v=v4.3&i=2160&t=ui#p=0JObAtHfeDX7HI7K'
 
     const claimedLinkResponse = await peanut.claimLinkGasless({
-      APIKey: "AK0mOEXAnNY0suFJoMRAfCHJqOazaTlY",
+      APIKey: NEXT_PUBLIC_PEANUT_API_KEY!,
       link,
       recipientAddress: walletAddress,
     });
@@ -55,7 +56,7 @@ export default function ClaimPage() {
   }
 
   return (
-    <main className="min-h-[90vh] w-full flex items-center justify-center px-4 md:px-0">
+    <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center px-4 md:px-0">
       {currentStep === 1 ? (
         <div>
           <h1 className="text-[#0C0D0E] font-semibold text-5xl text-center">

@@ -52,26 +52,21 @@ export function useWagmiConfig() {
           groupName: 'Recommended Wallet',
           wallets: [coinbaseWallet],
         },
-        {
-          groupName: 'Other Wallets',
-          wallets: [rainbowWallet, metaMaskWallet],
-        },
       ],
       {
-        appName: 'onchainkit',
+        appName: 'Zend',
         projectId,
       },
     );
 
     const wagmiConfig = createConfig({
-      chains: [base, baseSepolia],
-      // turn off injected provider discovery
+      chains: [base],
       multiInjectedProviderDiscovery: false,
       connectors,
       ssr: true,
       transports: {
         [base.id]: http(),
-        [baseSepolia.id]: http(),
+        // [baseSepolia.id]: http(),
       },
     });
 
