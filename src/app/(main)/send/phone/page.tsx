@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usdc from "../../../../assets/USDC.svg";
 import Image from "next/image";
 import { PayWithCoinbaseButton } from "@/components/buttons/PayWithCoinbaseButtob";
@@ -13,15 +13,13 @@ import { useEthersSigner } from "@/ethers";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 
 export default function SendToPhone() {
-  // const { address } = useWeb3ModalAccount();
   const { address } = useAccount();
-  const signer = useEthersSigner();
-  // const { walletProvider } = useWeb3ModalProvider();
   const [currentStep, setCurrentStep] = useState(1);
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
+  const [sdk, setSdk] = useState<CoinbaseWalletSDK>()
 
   function increaseStep(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -33,14 +31,21 @@ export default function SendToPhone() {
     setCurrentStep(1);
   }
 
-  const sdk = new CoinbaseWalletSDK({
-    appName: 'Zend',
-  });
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Client-side only code
+      const sdk = new CoinbaseWalletSDK({
+        appName: 'Zend',
+      });
+
+      setSdk(sdk)
+    }
+  }, []);
 
   async function createLink(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const provider = sdk.makeWeb3Provider();
+    const provider = sdk!.makeWeb3Provider();
     const web3Provider = new ethers.providers.Web3Provider(provider);
     const signer = web3Provider.getSigner();
 
