@@ -36,7 +36,7 @@ export default function Navbar() {
             />
           </div>
 
-          <div className="hidden ml-10 md:flex items-center w-max bg-[#F1F3F4] border border-[#F8F8FA] rounded-[60px] py-[6px] px-[10px]">
+          {/* <div className="hidden ml-10 md:flex items-center w-max bg-[#F1F3F4] border border-[#F8F8FA] rounded-[60px] py-[6px] px-[10px]">
             <button
               onClick={() => router.push("/send")}
               className={`${isMatch("/send") ? "bg-[#080065] text-white" : "text-[#0C0D0E]"} flex items-center gap-1 rounded-[56px] font-medium text-sm py-[10px] px-6`}
@@ -52,7 +52,7 @@ export default function Navbar() {
               <BsArrowBarRight className="h-4 w-4" />
               <span>Receive Crypto</span>
             </button>
-          </div>
+          </div> */}
           <div className="flex items-center w-[166.44px]">
             <LoginButton />
           </div>
