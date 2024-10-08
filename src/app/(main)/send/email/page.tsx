@@ -192,7 +192,7 @@ export default function SendToEmail() {
             ) : (
               <button
                 onClick={increaseStep}
-                disabled={!email || amount === 0}
+                disabled={!email || amount == 0}
                 className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
               >
                 Send
