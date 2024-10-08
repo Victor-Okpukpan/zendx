@@ -2,25 +2,30 @@
 import React, { useCallback } from "react";
 import { useAccount } from "wagmi";
 import { useConnect } from "wagmi";
+import Spinner from "../ui/Spinner";
 
-export default function Connect() {
+export default function Connect({ customStyle }: { customStyle: string }) {
   const { connectors, connect, data } = useConnect();
-  const { address, isConnected } = useAccount();
+  const { isConnecting } = useAccount();
 
-  const createWallet = useCallback(() => {
-    const coinbaseWalletConnector = connectors.find(
-      (connector) => connector.id === "coinbaseWalletSDK"
-    );
-    if (coinbaseWalletConnector) {
-      connect({ connector: coinbaseWalletConnector });
-    }
-  }, [connectors, connect]);
+  const createWallet = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      const coinbaseWalletConnector = connectors.find(
+        (connector) => connector.id === "coinbaseWalletSDK"
+      );
+      if (coinbaseWalletConnector) {
+        connect({ connector: coinbaseWalletConnector });
+      }
+    },
+    [connectors, connect]
+  );
   return (
     <button
-      className="bg-[#080065] flex items-center gap-1 rounded-[56px] text-white font-medium text-sm py-[10px] px-6"
+      className={`bg-[#080065] ${customStyle} text-white py-4 w-full font-bold disabled:text-[#667085]`}
       onClick={createWallet}
     >
-      {isConnected ? address : "Connect"}
+      {isConnecting ? <Spinner /> : "Connect"}
     </button>
   );
 }

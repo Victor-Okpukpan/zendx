@@ -46,8 +46,8 @@ export const PayWithCoinbaseButton = ({ destinationWalletAddress }: {destination
     };
   }, []);
 
-  const handleClick = () => {
-    console.log("clicked");
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     onrampInstance?.open();
   };
   return (

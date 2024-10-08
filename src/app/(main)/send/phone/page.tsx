@@ -8,18 +8,22 @@ import peanut from "@squirrel-labs/peanut-sdk";
 import axios from "axios";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
-import { useSendTransaction } from "wagmi";
-import { useEthersSigner } from "@/ethers";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
+import Modal from "@/components/ui/Modal";
+import { useRouter } from "next/navigation";
+import Connect from "@/components/buttons/Connect";
+import Spinner from "@/components/ui/Spinner";
 
 export default function SendToPhone() {
+  const router = useRouter();
   const { address } = useAccount();
   const [currentStep, setCurrentStep] = useState(1);
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
-  const [sdk, setSdk] = useState<CoinbaseWalletSDK>()
+  const [sdk, setSdk] = useState<CoinbaseWalletSDK>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function increaseStep(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -35,15 +39,16 @@ export default function SendToPhone() {
     if (typeof window !== "undefined") {
       // Client-side only code
       const sdk = new CoinbaseWalletSDK({
-        appName: 'Zend',
+        appName: "Zend",
       });
 
-      setSdk(sdk)
+      setSdk(sdk);
     }
   }, []);
 
   async function createLink(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    setIsLoading(true);
     // const provider = new ethers.providers.Web3Provider(window.ethereum);
     const provider = sdk!.makeWeb3Provider();
     const web3Provider = new ethers.providers.Web3Provider(provider);
@@ -58,7 +63,7 @@ export default function SendToPhone() {
       tokenType: 1,
       tokenAddress: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       tokenDecimals: 6,
-      baseUrl: "http://localhost:3000/claim"
+      baseUrl: "http://localhost:3000/claim",
     };
 
     const password = await peanut.getRandomString(16);
@@ -70,13 +75,13 @@ export default function SendToPhone() {
     });
 
     const transactionHashes: string[] = [];
-    console.log("txHas:", transactionHashes)
+    console.log("txHas:", transactionHashes);
 
     for (const unsignedTx of preparedTransactions.unsignedTxs) {
       const preparedTx = peanut.peanutToEthersV5Tx(unsignedTx);
       preparedTx.from = signerAddress;
 
-      console.log("ready", preparedTx)
+      console.log("ready", preparedTx);
 
       if (preparedTx.value) {
         preparedTx.value = preparedTx.value.toString();
@@ -85,10 +90,11 @@ export default function SendToPhone() {
       try {
         // Send transaction with the signer
         const txResponse = await signer.sendTransaction(preparedTx as any);
-        
+
         transactionHashes.push(txResponse.hash);
       } catch (error) {
         console.error("Transaction failed", error);
+        setIsLoading(false);
         return null;
       }
     }
@@ -99,25 +105,27 @@ export default function SendToPhone() {
       txHash: transactionHashes[transactionHashes.length - 1],
     });
 
-    setLink(links[0])
-  }
+    setLink(links[0]);
 
-  // try {
-  //   const response = await axios.post(
-  //     `https://zend.swap2naira.com/api/v1/transaction/${address}`,
-  //     {
-  //       link,
-  //       amount,
-  //       token: "USDC (base)",
-  //       method: "email",
-  //       recipient: email,
-  //     }
-  //   );
-  //   console.log("API response2:", response.data);
-  // } catch (error) {
-  //   console.error("Error sending address to API:", error);
-  //   setIsLoading(false);
-  // }
+    try {
+      const response = await axios.post(
+        `https://zend.swap2naira.com/api/v1/transaction/${address}`,
+        {
+          link,
+          amount,
+          token: "USDC (base)",
+          method: "phone",
+          recipient: phone,
+        }
+      );
+      console.log("API response2:", response.data);
+      setIsModalOpen(true);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error sending address to API:", error);
+      setIsLoading(false);
+    }
+  }
 
   return (
     <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center  px-4 md:px-0">
@@ -128,14 +136,11 @@ export default function SendToPhone() {
               <PayWithCoinbaseButton destinationWalletAddress={address} />
             </div>
             <div className="mb-5">
-              <label
-                htmlFor=""
-                className="text-[#667085] text-xs md:text-sm"
-              >
+              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
                 Recipient's phone number.
               </label>
               <input
-                type="email"
+                type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="bg-transparent w-full text-xs md:text-lg text-[#667085] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
@@ -177,13 +182,19 @@ export default function SendToPhone() {
               </div>
             </div>
 
-            <button
-              onClick={increaseStep}
-              disabled={!phone || amount === 0}
-              className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
-            >
-              Send
-            </button>
+            {!address ? (
+              <div className="mt-8 flex items-center w-full">
+                <Connect customStyle="rounded-[16px] py-4" />
+              </div>
+            ) : (
+              <button
+                onClick={increaseStep}
+                disabled={!phone || amount === 0}
+                className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
+              >
+                Send
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -224,11 +235,29 @@ export default function SendToPhone() {
               onClick={createLink}
               className={`bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold mt-8`}
             >
-              Confirm
+              {isLoading ? <Spinner />: "Confirm"}
             </button>
           </>
         )}
       </form>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <p className="text-sm mb-4">
+          Sending {amount} Base USDC to
+          <br />
+          <span className="font-medium">{phone}</span>
+        </p>
+
+        <button
+          onClick={() => {
+            setIsModalOpen(false);
+            router.push("/");
+          }}
+          className="mt-6 bg-[#080065] text-white rounded-[16px] py-4 px-4 w-full font-bold"
+        >
+          Back to Home Page
+        </button>
+      </Modal>
     </main>
   );
 }

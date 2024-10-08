@@ -2,18 +2,12 @@
 import Wrapper from "../Wrapper";
 import Image from "next/image";
 import logo from "../../assets/logo.svg";
-import { BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
-// import { CgMenuRight } from "react-icons/cg";
 import LoginButton from "../wallet/LoginButton";
-import { usePathname, useRouter } from "next/navigation";
+import Connect from "../buttons/Connect";
+import { useWallet } from "@/context";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  function isMatch(path: string) {
-    return pathname.includes(path);
-  }
+  const { address } = useWallet();
 
   return (
     <nav className="py-3 bg-white">
@@ -54,7 +48,7 @@ export default function Navbar() {
             </button>
           </div> */}
           <div className="flex items-center w-[166.44px]">
-            <LoginButton />
+            {!address ? <Connect customStyle="rounded-[56px] py-[10px]" /> : <LoginButton />}
           </div>
         </div>
       </Wrapper>
