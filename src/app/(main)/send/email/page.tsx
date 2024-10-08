@@ -64,7 +64,7 @@ export default function SendToEmail() {
       tokenType: 1,
       tokenAddress: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       tokenDecimals: 6,
-      baseUrl: "http://localhost:3000/claim",
+      baseUrl: "https://zend.vercel.app/claim",
     };
 
     const password = await peanut.getRandomString(16);
@@ -243,7 +243,7 @@ export default function SendToEmail() {
           </>
         )}
       </form>
-      
+
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <p className="text-sm mb-4">
           Sending {amount} Base USDC to
