@@ -20,7 +20,7 @@ export default function SendToEmail() {
   const { address } = useAccount();
   const [currentStep, setCurrentStep] = useState(1);
   const [email, setEmail] = useState("");
-  const [amount, setAmount] = useState<any>();
+  const [amount, setAmount] = useState<any>("");
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
   const [sdk, setSdk] = useState<CoinbaseWalletSDK>();
@@ -50,8 +50,7 @@ export default function SendToEmail() {
   async function createLink(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setIsLoading(true);
-
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
     const provider = sdk!.makeWeb3Provider();
     const web3Provider = new ethers.providers.Web3Provider(provider);
     const signer = web3Provider.getSigner();
@@ -161,7 +160,7 @@ export default function SendToEmail() {
                     width={26}
                     height={26}
                     alt="USDC"
-                    className="hidden"
+                    className="hidden md:block"
                   />
                   <Image
                     src={usdc}
@@ -192,7 +191,7 @@ export default function SendToEmail() {
             ) : (
               <button
                 onClick={increaseStep}
-                disabled={!email || amount == 0}
+                disabled={!email.trim() || Number(amount) <= 0 || !amount}
                 className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
               >
                 Send

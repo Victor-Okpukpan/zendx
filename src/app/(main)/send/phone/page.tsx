@@ -19,7 +19,7 @@ export default function SendToPhone() {
   const { address } = useAccount();
   const [currentStep, setCurrentStep] = useState(1);
   const [phone, setPhone] = useState("");
-  const [amount, setAmount] = useState<any>();
+  const [amount, setAmount] = useState<any>("");
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
   const [sdk, setSdk] = useState<CoinbaseWalletSDK>();
@@ -55,7 +55,6 @@ export default function SendToPhone() {
     const signer = web3Provider.getSigner();
 
     const signerAddress = await signer.getAddress();
-    console.log("Signer Address:", await signer.getAddress());
 
     const linkDetails = {
       chainId: "8453",
@@ -158,7 +157,7 @@ export default function SendToPhone() {
                     width={26}
                     height={26}
                     alt="USDC"
-                    className="hidden"
+                    className="hidden md:block"
                   />
                   <Image
                     src={usdc}
@@ -189,7 +188,7 @@ export default function SendToPhone() {
             ) : (
               <button
                 onClick={increaseStep}
-                disabled={!phone || amount == 0}
+                disabled={!phone.trim() || Number(amount) <= 0 || !amount}
                 className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
               >
                 Send

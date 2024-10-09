@@ -3,53 +3,114 @@ import { useEffect, useState } from "react";
 import peanut from "@squirrel-labs/peanut-sdk";
 import { useRouter } from "next/navigation";
 import { NEXT_PUBLIC_PEANUT_API_KEY } from "@/config";
+import axios from "axios";
+import Spinner from "@/components/ui/Spinner";
+import Modal from "@/components/ui/Modal";
 
 export default function ClaimPage() {
   const router = useRouter();
   const [isUnclaimed, setIsUnclaimed] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [link, setLink] = useState("");
+  const [linkState, setLinkState] = useState<any>([]);
+  console.log("link state:", linkState.data);
   const [walletAddress, setWalletAddress] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setLink(window.location.href);
       console.log(window.location.href);
     }
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    if (link) {
+      checkIfLinkHasBeenClaimed(link);
+    }
+  }, [link]);
+
+  async function checkIfLinkHasBeenClaimed(link: string) {
+    try {
+      const response = await axios.put(
+        "https://zend.swap2naira.com/api/v1/transaction-request",
+        { link }
+      );
+
+      const responseData = response.data;
+
+      setLinkState(responseData);
+
+      if (responseData.data.transactions) {
+        if (responseData.data.transactions.status === "pending") {
+          setIsUnclaimed(true);
+        } else {
+          setIsUnclaimed(false);
+        }
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function claimLink(
     event: React.MouseEvent<HTMLButtonElement>
-  ): Promise<string> {
+  ) {
     event.preventDefault();
-    // const link = 'https://peanut.to/claim?c=137&v=v4.3&i=2160&t=ui#p=0JObAtHfeDX7HI7K'
+    setIsLoading(true);
 
-    const claimedLinkResponse = await peanut.claimLinkGasless({
-      APIKey: NEXT_PUBLIC_PEANUT_API_KEY!,
-      link,
-      recipientAddress: walletAddress,
-    });
+    try {
+      const claimedLinkResponse = await peanut.claimLinkGasless({
+        APIKey: NEXT_PUBLIC_PEANUT_API_KEY!,
+        link,
+        recipientAddress: walletAddress,
+      });
 
-    console.log("claimed", claimedLinkResponse.txHash);
+      const response = await axios.get(
+        `https://zend.swap2naira.com/api/v1/transaction-action/${linkState.data.transactions.uuid}`
+      );
 
-    return claimedLinkResponse.txHash;
+      setIsModalOpen(true);
+      setIsLoading(false);
+
+      return claimedLinkResponse.txHash;
+    } catch (error: any) {
+      console.error("An error occurred while claiming the link:", error);
+      setIsLoading(false);
+    }
   }
 
-  if (isUnclaimed) {
+  if (loading) {
     return (
-      <main className="min-h-[90vh] w-full flex items-center justify-center  px-4 md:px-0">
-        <div className="">
-        <h1 className="text-[#0C0D0E] font-semibold text-5xl text-center">
-          This link has already
-          <br />
-          been claimed.
-        </h1>
+      <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center">
+        <div>
+          <p className="text-[#667085] text-lg text-center mt-5 mb-8">
+            Please wait while we verify the status of the link...
+          </p>
+        </div>
+      </main>
+    );
+  }
 
-        <p className="text-[#667085] text-lg text-center mt-5 mb-8">
-          If you believe this is an error or need assistance,
-          <br />
-          please contact our support team.
-        </p>
+  if (!isUnclaimed) {
+    return (
+      <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center  px-4 md:px-0">
+        <div className="">
+          <h1 className="text-[#0C0D0E] font-semibold text-2xl md:text-5xl text-center">
+            This link has already
+            <br />
+            been claimed.
+          </h1>
+
+          <p className="text-[#667085] text-xs md:text-lg text-center mt-5 mb-8">
+            If you believe this is an error or need assistance,
+            <br />
+            please contact our support team.
+          </p>
         </div>
       </main>
     );
@@ -59,7 +120,7 @@ export default function ClaimPage() {
     <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center px-4 md:px-0">
       {currentStep === 1 ? (
         <div>
-          <h1 className="text-[#0C0D0E] font-semibold text-5xl text-center">
+          <h1 className="text-[#0C0D0E] font-semibold text-2xl md:text-5xl text-center">
             This link hasn't been claimed yet. You can
             <br />
             proceed to claim your{" "}
@@ -68,7 +129,7 @@ export default function ClaimPage() {
           <div className="flex items-center justify-center w-full">
             <button
               onClick={() => setCurrentStep(2)}
-              className="bg-[#080065] py-5 px-14 mt-5 font-bold text-base rounded-[20px] text-white"
+              className="bg-[#080065] mt-8 text-xs py-4 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
             >
               Claim now
             </button>
@@ -93,10 +154,28 @@ export default function ClaimPage() {
             disabled={!walletAddress}
             className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-5`}
           >
-            Claim
+            {isLoading ? <Spinner /> : "Claim"}
           </button>
         </form>
       )}
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <p className="text-sm mb-4">
+          You have claimed this link.
+          <br />
+          Please check your balance.
+        </p>
+
+        <button
+          onClick={() => {
+            setIsModalOpen(false);
+            router.push("/");
+          }}
+          className="mt-6 bg-[#080065] text-white rounded-[16px] py-4 px-4 w-full font-bold"
+        >
+          Back to Home Page
+        </button>
+      </Modal>
     </main>
   );
 }
