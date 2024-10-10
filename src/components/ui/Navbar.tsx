@@ -8,13 +8,15 @@ import Connect from "../buttons/Connect";
 import { useWallet } from "@/context";
 import ThemeSwitch from "../buttons/ThemeSwitch";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { address } = useWallet();
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
 
   return (
-    <nav className="py-3 bg-transparent z-50">
+    <nav className="md:py-3 pt-8 bg-transparent z-50">
       <Wrapper>
         <div className="flex items-center justify-between w-full">
           <div className="w-max z-50">
@@ -23,14 +25,16 @@ export default function Navbar() {
               alt="logo"
               width={116}
               height={36}
-              className="hidden md:block"
+              className="hidden md:block cursor-pointer"
+              onClick={() => router.push("/")}
             />
             <Image
               src={resolvedTheme === "light" ? logo : logoDark}
               alt="logo"
               width={69}
               height={22}
-              className="md:hidden"
+              className="md:hidden cursor-pointer"
+              onClick={() => router.push("/")}
             />
           </div>
 
