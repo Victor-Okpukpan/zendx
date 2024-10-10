@@ -31,7 +31,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       >
         <Providers>
           <div className="dark:bg-grid-white/[0.2] h-full relative">
-            <div className="absolute pointer-events-none inset-0 hidden dark:flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <div className="absolute pointer-events-none inset-0 hidden dark:flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)]"></div>
             <OnchainProviders>{props.children}</OnchainProviders>
           </div>
         </Providers>

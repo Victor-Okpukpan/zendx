@@ -22,7 +22,7 @@ export default function Connect({ customStyle }: { customStyle: string }) {
   );
   return (
     <button
-      className={`bg-[#080065] dark:bg-[#014EF2] ${customStyle} text-white py-4 px-6 min-w-[150px] font-bold disabled:text-[#667085]`}
+      className={`bg-[#080065] dark:bg-[#014EF2] ${customStyle} text-white py-4 px-6 font-bold disabled:text-[#667085]`}
       onClick={createWallet}
     >
       {isConnecting ? <Spinner /> : "Connect"}

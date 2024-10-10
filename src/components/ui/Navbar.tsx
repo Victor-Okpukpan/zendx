@@ -36,7 +36,7 @@ export default function Navbar() {
 
           <div className="flex items-center z-50 gap-2">
             {!address ? (
-              <Connect customStyle="rounded-[56px] py-[10px]" />
+              <Connect customStyle="rounded-[56px] py-[10px] min-w-[150px]" />
             ) : (
               <LoginButton />
             )}
