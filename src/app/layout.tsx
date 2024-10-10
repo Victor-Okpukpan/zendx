@@ -30,7 +30,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         className={`${bricolage.className} bg-gradient-to-b from-[#FAFAFA] to-[#E0E3F9] bg-no-repeat  dark:bg-gradient-to-tl dark:from-[#12056A] dark:via-[#09092E] dark:to-[#000617] relative overflow-hidden`}
       >
         <Providers>
-          <div className="dark:bg-grid-[#D0D5DD]/[0.2] h-full relative">
+          <div className="dark:bg-grid-[#D0D5DD]/[0.09] h-full relative">
             <div className="absolute pointer-events-none inset-0 hidden dark:flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
             <OnchainProviders>{props.children}</OnchainProviders>
           </div>
