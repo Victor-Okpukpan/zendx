@@ -54,7 +54,7 @@ export const PayWithCoinbaseButton = ({ destinationWalletAddress }: {destination
     <button
       onClick={handleClick}
       disabled={!onrampInstance}
-      className="bg-[#080065] rounded-[56px] text-white font-medium text-xs py-2 px-4"
+      className="bg-[#080065] dark:bg-[#04308E] rounded-[10px] text-white font-medium text-xs py-2 px-4"
     >
       Buy with Coinbase
     </button>

@@ -12,7 +12,6 @@
     --text-ock-success: theme(colors.lime.600);
     --text-ock-warning: theme(colors.orange.600);
     --text-ock-disabled: theme(colors.gray.400);
- 
     --bg-ock-default: theme(colors.gray.50);
     --bg-ock-default-hover: theme(colors.gray.200);
     --bg-ock-default-active: theme(colors.gray.300);
@@ -33,7 +32,7 @@
     --bg-ock-success: theme(colors.lime.300);
     --bg-ock-default-reverse: theme(colors.gray.950);
   }
- 
+
   .dark {
     --text-ock-inverse: theme(colors.gray.950);
     --text-ock-foreground: theme(colors.gray.50);
@@ -80,6 +79,28 @@ input[type="number"]::-webkit-inner-spin-button {
   border-left-color: #3498db; /* Blue spinner color */
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
+}
+
+.ockConnectWallet_Container span {
+  color: white;
+  font-size: 14px;
+}
+
+@layer utilities {
+  .custom-gradient {
+    background-image: linear-gradient(
+        158.01deg,
+        #12056a -0.22%,
+        #09092e -0.22%,
+        #000617 13.85%
+      ),
+      linear-gradient(
+        348.8deg,
+        #09092e 14.03%,
+        #000617 30.32%,
+        rgba(0, 6, 23, 0) 32.63%
+      );
+  }
 }
 
 @media (max-width: 480px) {

@@ -11,7 +11,7 @@ export default function ConnectButton() {
 
   return (
     <button
-      className="bg-[#080065] flex items-center gap-1 rounded-[56px] text-white font-medium text-sm py-[10px] px-6"
+      className="bg-[#080065] dark:bg-[#014EF2] flex items-center gap-1 rounded-[56px] text-white font-medium text-sm py-[10px] px-6"
       onClick={() => {
         isConnected ? open({ view: "Account" }) : open({ view: "Connect" });
       }}

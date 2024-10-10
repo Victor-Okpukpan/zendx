@@ -130,27 +130,27 @@ export default function SendToEmail() {
   }
 
   return (
-    <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center  px-4 md:px-0">
-      <form className="border w-full max-w-[550px] border-[#DFE1E6] rounded-[10px] bg-white pt-[22px] pb-[55px] px-10">
+    <main className="min-h-screen w-full flex items-center justify-center  px-4 md:px-0">
+      <form className="border w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
               <PayWithCoinbaseButton destinationWalletAddress={address} />
             </div>
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
+              <label htmlFor="" className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm">
                 Recipient's email address.
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-transparent w-full text-xs md:text-lg text-[#667085] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
+                className="bg-transparent w-full text-xs md:text-lg text-[#667085] dark:text-[#EBF1FE] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
               />
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
+              <label htmlFor="" className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm">
                 Enter the amount of Base USDC you wish to send.
               </label>
               <div className="border border-[#DFE1E6] rounded-[10px] py-[14px] px-4 flex items-center">
@@ -169,7 +169,7 @@ export default function SendToEmail() {
                     alt="USDC"
                     className="md:hidden"
                   />
-                  <p className="text-[#080065] text-xs md:text-sm font-medium">
+                  <p className="text-[#080065] dark:text-white text-xs md:text-sm font-medium">
                     Base USDC
                   </p>
                 </div>
@@ -178,7 +178,7 @@ export default function SendToEmail() {
                   value={amount}
                   min={0}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="bg-transparent flex-1 text-right w-full text-xs md:text-lg font-bold text-[#667085] outline-none"
+                  className="bg-transparent flex-1 text-right w-full text-xs md:text-lg font-bold text-[#667085] dark:text-[#EBF1FE] outline-none"
                   style={{ MozAppearance: "textfield" }}
                 />
               </div>
@@ -192,7 +192,7 @@ export default function SendToEmail() {
               <button
                 onClick={increaseStep}
                 disabled={!email.trim() || Number(amount) <= 0 || !amount}
-                className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
+                className={`disabled:bg-[#DFE1E6] disabled:dark:bg-[#c2c5cd] bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
               >
                 Send
               </button>
@@ -200,7 +200,7 @@ export default function SendToEmail() {
           </>
         ) : (
           <>
-            <div className="text-[#0C0D0E] space-x-1 mb-6 flex items-center">
+            <div className="text-[#0C0D0E] dark:text-[#9C9D9E] space-x-1 mb-6 flex items-center">
               <button onClick={decreaseStep} className="-ml-1">
                 <TiArrowLeft className="w-6 h-6" />
               </button>
@@ -208,34 +208,34 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
+              <label htmlFor="" className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm">
                 Recipient's email address.
               </label>
-              <p className="md:text-lg text-[#0C0D0E] font-semibold py-1">
+              <p className="md:text-lg text-[#0C0D0E] dark:text-white font-semibold py-1">
                 {email}
               </p>
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] text-xs md:text-sm">
+              <label htmlFor="" className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm">
                 You Sent
               </label>
               <div className="flex items-center gap-2">
-                <span className="md:text-lg text-[#0C0D0E] font-semibold py-1">
+                <span className="md:text-lg text-[#0C0D0E] dark:text-white font-semibold py-1">
                   {amount}
                 </span>
                 <Image src={usdc} width={26} height={26} alt="USDC" />
               </div>
             </div>
 
-            <p className="text-[#667085] text-xs md:text-sm">
+            <p className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm">
               Estimated output: You will receive {amount} Base USDC, or the
               transaction will revert.
             </p>
 
             <button
               onClick={createLink}
-              className={`bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold mt-8`}
+              className={`bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 w-full font-bold mt-8`}
             >
               {isLoading ? <Spinner />: "Confirm"}
             </button>
@@ -244,7 +244,7 @@ export default function SendToEmail() {
       </form>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p className="text-sm mb-4">
+        <p className="text-sm text-[#0C0D0E] dark:text-[#9C9D9E] mb-4">
           Sending {amount} Base USDC to
           <br />
           <span className="font-medium">{email}</span>
@@ -255,7 +255,7 @@ export default function SendToEmail() {
             setIsModalOpen(false);
             router.push("/");
           }}
-          className="mt-6 bg-[#080065] text-white rounded-[16px] py-4 px-4 w-full font-bold"
+          className="mt-6 bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 px-4 w-full font-bold"
         >
           Back to Home Page
         </button>
