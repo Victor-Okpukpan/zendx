@@ -5,7 +5,7 @@ export default function SendPage() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen w-full flex md:items-center justify-center  px-4 md:px-0">
+    <main className="min-h-screen w-full flex items-start md:items-center justify-center  px-4 md:px-0">
       <div className="mt-24 md:mt-0">
         <h1 className="text-[#0C0D0E] dark:text-[#DEDEDE] font-semibold text-2xl md:text-7xl text-center">
           Send <span className="text-[#080065] dark:text-[#014EF2] font-extrabold">Base USDC</span>{" "}
