@@ -87,8 +87,8 @@ export default function ClaimPage() {
   if (loading) {
     return (
       <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center">
-        <div>
-          <p className="text-[#667085] text-lg text-center mt-5 mb-8">
+        <div className=" z-50">
+          <p className="text-[#667085] dark:text-white text-lg text-center mt-5 mb-8">
             Please wait while we verify the status of the link...
           </p>
         </div>
@@ -98,15 +98,15 @@ export default function ClaimPage() {
 
   if (!isUnclaimed) {
     return (
-      <main className="min-h-screen w-full flex items-center justify-center  px-4 md:px-0">
-        <div className="">
-          <h1 className="text-[#0C0D0E] font-semibold text-2xl md:text-7xl text-center">
+      <main className="min-h-screen w-full flex items-start md:items-center justify-center  px-4 md:px-0">
+        <div className="mt-36 md:mt-0 z-50">
+          <h1 className="text-[#0C0D0E] z-50 dark:text-[#DEDEDE] font-semibold text-2xl md:text-5xl text-center">
             This link has already
             <br />
             been claimed.
           </h1>
 
-          <p className="text-[#667085] text-xs md:text-lg text-center mt-5 mb-8">
+          <p className="text-[#667085] dark:text-[#DEDEDE] text-xs md:text-lg text-center mt-5 mb-8">
             If you believe this is an error or need assistance,
             <br />
             please contact our support team.
@@ -117,26 +117,26 @@ export default function ClaimPage() {
   }
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center px-4 md:px-0">
+    <main className="min-h-screen w-full flex items-start md:items-center justify-center px-4 md:px-0">
       {currentStep === 1 ? (
-        <div>
-          <h1 className="text-[#0C0D0E] font-semibold text-2xl md:text-7xl text-center">
-            This link hasn't been claimed yet. You can
-            <br />
+        <div className="mt-36 md:mt-0 z-50">
+          <h1 className="text-[#0C0D0E] z-50 dark:text-[#DEDEDE] font-semibold text-2xl md:text-5xl text-center">
+            This link hasn't been claimed yet. You can{" "}
+            <br className="hidden md:block"/>
             proceed to claim your{" "}
-            <span className="text-[#080065] font-extrabold">Base USDC</span>
+            <span className="text-[#080065] dark:text-[#014EF2] font-extrabold">Base USDC.</span>
           </h1>
           <div className="flex items-center justify-center w-full">
             <button
               onClick={() => setCurrentStep(2)}
-              className="bg-[#080065] mt-8 text-xs py-4 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
+              className="bg-[#080065] dark:bg-[#014EF2] text-xs py-4 px-6 md:py-5 md:px-14 font-semibold md:text-base rounded-[20px] text-white mt-8"
             >
               Claim now
             </button>
           </div>
         </div>
       ) : (
-        <form className="border w-full max-w-[550px] border-[#DFE1E6] rounded-[10px] bg-white pt-[22px] pb-[55px] px-10">
+        <form className="border z-50 w-full mt-36 md:mt-0 max-w-[550px] border-[#DFE1E6] rounded-[10px] bg-white pt-[22px] pb-[55px] px-10">
           <div className="mb-5">
             <label htmlFor="" className="text-[#667085] text-sm">
               Please provide your wallet address.

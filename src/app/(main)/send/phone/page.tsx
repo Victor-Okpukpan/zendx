@@ -128,7 +128,7 @@ export default function SendToPhone() {
 
   return (
     <main className="min-h-screen w-full flex items-start md:items-center justify-center  px-4 md:px-0">
-      <form className="border mt-24 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+      <form className="border mt-36 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
