@@ -155,7 +155,7 @@ export default function SendToBaseName({view, setView}: any) {
         <div className="flex items-center justify-center gap-4 mb-5 w-full">
           <button
             onClick={() => setView("email")}
-            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
           >
             Email Address
           </button>
@@ -163,7 +163,7 @@ export default function SendToBaseName({view, setView}: any) {
           <button
           disabled={view === "basename"}
             onClick={() => setView("basename")}
-            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
           >
             Base Name
           </button>
