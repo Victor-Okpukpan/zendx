@@ -33,7 +33,7 @@ export default function SendToEmail({ view, setView }: any) {
     addresses: { address: ['base'] },
     assets: ['USDC'],
     presetFiatAmount: 3,
-    fiatCurrency: 'USD'
+    fiatCurrency: 'NGN'
   });
 
   function increaseStep(event: React.MouseEvent<HTMLButtonElement>) {

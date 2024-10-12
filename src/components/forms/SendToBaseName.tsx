@@ -33,7 +33,7 @@ export default function SendToBaseName({view, setView}: any) {
     addresses: { address: ['base'] },
     assets: ['USDC'],
     presetFiatAmount: 3,
-    fiatCurrency: 'USD'
+    fiatCurrency: 'NGN'
   });
 
 
