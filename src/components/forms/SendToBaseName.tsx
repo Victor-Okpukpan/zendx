@@ -116,6 +116,7 @@ export default function SendToBaseName({view, setView}: any) {
 
       const receipt = await tx.wait();
       console.log("Transaction mined:", receipt.transactionHash);
+      setIsModalOpen(true);
       setIsLoading(false);
       return receipt;
     } catch (error) {
