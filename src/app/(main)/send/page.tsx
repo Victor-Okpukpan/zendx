@@ -11,7 +11,7 @@ export default function SendPage() {
   return (
     <>
       <main
-        className={`min-h-screen relative w-full flex flex-col items-start md:items-center justify-center px-4 md:px-0`}
+        className={`min-h-screen relative w-full flex flex-col items-center justify-start md:justify-center px-4 md:px-0`}
       >
         <div
           className={`mt-36 md:mt-0 transition-transform duration-700 ease-in-out ${view === "default" ? "translate-y-0" : "-translate-y-full hidden"}`}

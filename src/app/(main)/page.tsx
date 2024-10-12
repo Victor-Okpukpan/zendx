@@ -15,9 +15,9 @@ export default function Home() {
         </h1>
 
         <p className="text-[#667085] dark:text-[#DEDEDE] text-xs md:text-lg text-center mt-5 mb-8">
-          Instantly transfer USDC using just an email or phone
+          Instantly transfer USDC using just an email or base
           <br />
-          number—fast, secure, and simple with Zend.
+          name—fast, secure, and simple with Zend.
         </p>
 
         <div className="flex items-center justify-center w-full">

@@ -176,17 +176,17 @@ export default function SendToBaseName() {
                 className="bg-transparent w-full text-xs md:text-lg text-[#667085] dark:text-[#EBF1FE] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
               />
               {isCheckingBaseName ? (
-                <p className="loading-text">
+                <p className="loading-text text-xs md:text-base">
                   <Spinner /> Checking Basename...
                 </p>
               ) : walletAddress ? (
-                <p className="text-green-500">
+                <p className="text-green-500 text-xs md:text-base">
                   Basename found with address: {walletAddress}
                 </p>
               ) : baseName.trim() &&
                 !isCheckingBaseName &&
                 isBaseNameChecked ? (
-                <p className="text-red-500">This Basename does not exist</p>
+                <p className="text-red-500 text-xs md:text-base">This Basename does not exist</p>
               ) : null}
             </div>
 
