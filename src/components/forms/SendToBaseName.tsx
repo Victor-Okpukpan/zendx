@@ -11,6 +11,8 @@ import Modal from "@/components/ui/Modal";
 import { useRouter } from "next/navigation";
 import Connect from "@/components/buttons/Connect";
 import Spinner from "@/components/ui/Spinner";
+import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+import { NEXT_PUBLIC_CDP_PROJECT_ID } from "@/config";
 
 export default function SendToBaseName({view, setView}: any) {
   const router = useRouter();
@@ -25,6 +27,15 @@ export default function SendToBaseName({view, setView}: any) {
   const [debouncedBaseName, setDebouncedBaseName] = useState(baseName);
   const [isCheckingBaseName, setIsCheckingBaseName] = useState(false);
   const [isBaseNameChecked, setIsBaseNameChecked] = useState(false);
+
+  const onrampBuyUrl = getOnrampBuyUrl({
+    projectId: NEXT_PUBLIC_CDP_PROJECT_ID!,
+    addresses: { address: ['base'] },
+    assets: ['USDC'],
+    presetFiatAmount: 3,
+    fiatCurrency: 'USD'
+  });
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -171,7 +182,7 @@ export default function SendToBaseName({view, setView}: any) {
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
-              <PayWithCoinbaseButton destinationWalletAddress={address} />
+              <FundButton text="Buy with Coinbase" fundingUrl={onrampBuyUrl} className="bg-[#080065] dark:bg-[#04308E] rounded-[10px] text-white font-medium text-xs py-2 px-4" />
             </div>
             <div className="mb-5">
               <label
@@ -182,6 +193,7 @@ export default function SendToBaseName({view, setView}: any) {
               </label>
               <input
                 type="text"
+                placeholder="e.g defigrandson.base.eth"
                 value={baseName}
                 onChange={(e) => setBaseName(e.target.value)}
                 className="bg-transparent w-full text-xs md:text-lg text-[#667085] dark:text-[#EBF1FE] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
