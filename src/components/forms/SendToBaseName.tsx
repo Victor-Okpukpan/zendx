@@ -12,14 +12,13 @@ import { useRouter } from "next/navigation";
 import Connect from "@/components/buttons/Connect";
 import Spinner from "@/components/ui/Spinner";
 
-export default function SendToBaseName() {
+export default function SendToBaseName({view, setView}: any) {
   const router = useRouter();
   const { address } = useAccount();
   const [currentStep, setCurrentStep] = useState(1);
   const [baseName, setBaseName] = useState("");
   const [amount, setAmount] = useState<any>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [link, setLink] = useState("");
   const [sdk, setSdk] = useState<CoinbaseWalletSDK>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
@@ -91,11 +90,7 @@ export default function SendToBaseName() {
     ];
 
     const usdcAddress = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // Replace with actual address
-    const usdcContract = new ethers.Contract(
-      usdcAddress,
-      usdcABI,
-      signer
-    );
+    const usdcContract = new ethers.Contract(usdcAddress, usdcABI, signer);
 
     const amountInWei = ethers.utils.parseUnits(amount.toString(), 6);
 
@@ -110,11 +105,11 @@ export default function SendToBaseName() {
 
       const receipt = await tx.wait();
       console.log("Transaction mined:", receipt.transactionHash);
-      setIsLoading(false)
+      setIsLoading(false);
       return receipt;
     } catch (error) {
       console.error("Error sending USDC:", error);
-      setIsLoading(false)
+      setIsLoading(false);
       throw error;
     }
   }
@@ -156,7 +151,23 @@ export default function SendToBaseName() {
 
   return (
     <>
-      <form className="border mt-36 z-50 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+      <form className="border mt-36 z-50 md:mt-0 w-full min-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+        <div className="flex items-center justify-center gap-4 mb-5 w-full">
+          <button
+            onClick={() => setView("email")}
+            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+          >
+            Email Address
+          </button>
+
+          <button
+          disabled={view === "basename"}
+            onClick={() => setView("basename")}
+            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+          >
+            Base Name
+          </button>
+        </div>
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
@@ -167,7 +178,7 @@ export default function SendToBaseName() {
                 htmlFor=""
                 className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm"
               >
-                Recipient's Basename.
+                Recipient's Base Name.
               </label>
               <input
                 type="text"
@@ -176,17 +187,21 @@ export default function SendToBaseName() {
                 className="bg-transparent w-full text-xs md:text-lg text-[#667085] dark:text-[#EBF1FE] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
               />
               {isCheckingBaseName ? (
-                <p className="loading-text text-xs md:text-base">
-                  <Spinner /> Checking Basename...
+                <p className="loading-text text-xs md:text-sm mt-1 flex items-center">
+                  <Spinner /> <span className="ml-1">Checking Basename...</span>
                 </p>
               ) : walletAddress ? (
-                <p className="text-green-500 text-xs md:text-base">
-                  Basename found with address: {walletAddress}
+                <p className="text-green-500 text-xs md:text-sm mt-1">
+                  Basename found with address:
+                  <br />
+                  {walletAddress}
                 </p>
               ) : baseName.trim() &&
                 !isCheckingBaseName &&
                 isBaseNameChecked ? (
-                <p className="text-red-500 text-xs md:text-base">This Basename does not exist</p>
+                <p className="text-red-500 text-xs md:text-sm mt-1">
+                  This Basename does not exist. <a href="https://www.base.org/names" target="_blank" rel="noopener noreferrer" className="underline">Claim here</a>
+                </p>
               ) : null}
             </div>
 
@@ -235,7 +250,12 @@ export default function SendToBaseName() {
             ) : (
               <button
                 onClick={increaseStep}
-                disabled={!baseName.trim() || Number(amount) <= 0 || !amount || !walletAddress}
+                disabled={
+                  !baseName.trim() ||
+                  Number(amount) <= 0 ||
+                  !amount ||
+                  !walletAddress
+                }
                 className={`disabled:bg-[#DFE1E6] disabled:dark:bg-[#c2c5cd] bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-8`}
               >
                 Send

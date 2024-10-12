@@ -25,7 +25,7 @@ export default function Home() {
             onClick={() => router.push("/send")}
             className="bg-[#080065] dark:bg-[#014EF2] text-xs py-4 px-6 md:py-5 md:px-14 font-bold md:text-base rounded-[20px] text-white"
           >
-            Send Crypto
+            Get Started
           </button>
         </div>
       </div>

@@ -15,7 +15,7 @@ import LoginButton from "@/components/wallet/LoginButton";
 import Connect from "@/components/buttons/Connect";
 import Spinner from "@/components/ui/Spinner";
 
-export default function SendToEmail() {
+export default function SendToEmail({ view, setView }: any) {
   const router = useRouter();
   const { address } = useAccount();
   const [currentStep, setCurrentStep] = useState(1);
@@ -131,7 +131,23 @@ export default function SendToEmail() {
 
   return (
     <>
-      <form className="border mt-36 z-50 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+      <form className="border mt-36 z-50 md:mt-0 w-full min-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+      <div className="flex items-center justify-center gap-4 mb-5 w-full">
+          <button
+            onClick={() => setView("email")}
+            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+          >
+            Email Address
+          </button>
+
+          <button
+          disabled={view === "basename"}
+            onClick={() => setView("basename")}
+            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full`}
+          >
+            Base Name
+          </button>
+        </div>
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">

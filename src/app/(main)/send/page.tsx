@@ -6,14 +6,14 @@ import { useState } from "react";
 
 export default function SendPage() {
   const router = useRouter();
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("email");
 
   return (
     <>
       <main
         className={`min-h-screen relative w-full flex flex-col items-center justify-start md:justify-center px-4 md:px-0`}
       >
-        <div
+        {/* <div
           className={`mt-36 md:mt-0 transition-transform duration-700 ease-in-out ${view === "default" ? "translate-y-0" : "-translate-y-full hidden"}`}
         >
           <h1 className="text-[#0C0D0E] dark:text-[#DEDEDE] font-semibold text-2xl md:text-7xl text-center">
@@ -47,18 +47,18 @@ export default function SendPage() {
               Base Name
             </button>
           </div>
+        </div> */}
+
+        <div
+          className={`transition-transform z-40 duration-700 ease-in-out `}
+        >
+          {view === "email" && <SendToEmail setView={setView} view={view} />}
         </div>
 
         <div
-          className={`transition-transform z-40 duration-700 ease-in-out ${view === "email" ? "translate-y-0" : "translate-y-full"}`}
+          className={`transition-transform z-50 duration-700 ease-in-out`}
         >
-          {view === "email" && <SendToEmail />}
-        </div>
-
-        <div
-          className={`transition-transform z-50 duration-700 ease-in-out ${view === "basename" ? "translate-y-0" : "translate-y-full"}`}
-        >
-          {view === "basename" && <SendToBaseName />}
+          {view === "basename" && <SendToBaseName setView={setView} view={view} />}
         </div>
       </main>
     </>
