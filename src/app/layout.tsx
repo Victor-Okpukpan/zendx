@@ -22,6 +22,17 @@ export const metadata: Metadata = {
   title: "Zend",
   description:
     "Instantly transfer USDC using just an email or basename — fast, secure, and simple with Zend.",
+  openGraph: {
+    type: "website",
+    url: "https://zend.vercel.app",
+    title: "Zend",
+    description: "Instantly transfer USDC using just an email or basename — fast, secure, and simple with Zend.",
+    images: [
+      {
+        url: "https://zend.vercel.app/opengraph-image.jpg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {

@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import LoginButton from "@/components/wallet/LoginButton";
 import Connect from "@/components/buttons/Connect";
 import Spinner from "@/components/ui/Spinner";
-import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+import { FundButton, getOnrampBuyUrl } from "@coinbase/onchainkit/fund";
 import { NEXT_PUBLIC_CDP_PROJECT_ID } from "@/config";
 
 export default function SendToEmail({ view, setView }: any) {
@@ -30,10 +30,10 @@ export default function SendToEmail({ view, setView }: any) {
 
   const onrampBuyUrl = getOnrampBuyUrl({
     projectId: NEXT_PUBLIC_CDP_PROJECT_ID!,
-    addresses: { address: ['base'] },
-    assets: ['USDC'],
+    addresses: { address: ["base"] },
+    assets: ["USDC"],
     presetFiatAmount: 3,
-    fiatCurrency: 'NGN'
+    fiatCurrency: "NGN",
   });
 
   function increaseStep(event: React.MouseEvent<HTMLButtonElement>) {
@@ -143,18 +143,18 @@ export default function SendToEmail({ view, setView }: any) {
   return (
     <>
       <form className="border mt-36 z-50 md:mt-0 w-full max-w-[550px] md:min-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
-      <div className="flex items-center justify-center gap-4 mb-5 w-full">
+        <div className="flex items-center justify-center gap-4 mb-5 w-full">
           <button
             onClick={() => setView("email")}
-            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
+            className={`${view === "email" ? "bg-[#080065] dark:bg-[#014EF2] text-white" : "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
           >
             Email Address
           </button>
 
           <button
-          disabled={view === "basename"}
+            disabled={view === "basename"}
             onClick={() => setView("basename")}
-            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white": "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
+            className={`${view === "basename" ? "bg-[#080065] dark:bg-[#014EF2] text-white" : "bg-white dark:bg-[#DEDEDE] text-[#4D4B4B] dark:text-[#000617]"} text-xs py-4 md:py-5 font-semibold md:text-base rounded-[20px]  w-full border dark:border-0`}
           >
             Base Name
           </button>
@@ -162,7 +162,11 @@ export default function SendToEmail({ view, setView }: any) {
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
-              <FundButton text="Buy with Coinbase" fundingUrl={onrampBuyUrl} className="bg-[#080065] dark:bg-[#04308E] rounded-[10px] text-white font-medium text-xs py-2 px-4" />
+              <FundButton
+                text="Buy with Coinbase"
+                fundingUrl={onrampBuyUrl}
+                className="bg-[#080065] dark:bg-[#04308E] rounded-[10px] text-white font-medium text-xs py-2 px-4"
+              />
             </div>
             <div className="mb-5">
               <label

@@ -9,7 +9,7 @@ import Modal from "@/components/ui/Modal";
 
 export default function ClaimPage() {
   const router = useRouter();
-  const [isUnclaimed, setIsUnclaimed] = useState(false);
+  const [isUnclaimed, setIsUnclaimed] = useState(true);
   const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -136,16 +136,16 @@ export default function ClaimPage() {
           </div>
         </div>
       ) : (
-        <form className="border z-50 w-full mt-36 md:mt-0 max-w-[550px] border-[#DFE1E6] rounded-[10px] bg-white pt-[22px] pb-[55px] px-10">
+        <form className="border z-50 w-full mt-36 md:mt-0 max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
           <div className="mb-5">
-            <label htmlFor="" className="text-[#667085] text-sm">
+            <label htmlFor="" className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm">
               Please provide your wallet address.
             </label>
             <input
               type="text"
               value={walletAddress}
               onChange={(e) => setWalletAddress(e.target.value)}
-              className="bg-transparent w-full text-lg text-[#667085] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
+              className="bg-transparent w-full text-xs md:text-lg text-[#667085] dark:text-[#EBF1FE] py-[14px] px-4 border border-[#DFE1E6] rounded-[10px] outline-none"
             />
           </div>
 
