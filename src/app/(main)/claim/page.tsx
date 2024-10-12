@@ -152,7 +152,7 @@ export default function ClaimPage() {
           <button
             onClick={claimLink}
             disabled={!walletAddress}
-            className={`disabled:bg-[#DFE1E6] bg-[#080065] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-5`}
+            className={`disabled:bg-[#DFE1E6] bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 w-full font-bold disabled:text-[#667085]  mt-5`}
           >
             {isLoading ? <Spinner /> : "Claim"}
           </button>
@@ -171,7 +171,7 @@ export default function ClaimPage() {
             setIsModalOpen(false);
             router.push("/");
           }}
-          className="mt-6 bg-[#080065] text-white rounded-[16px] py-4 px-4 w-full font-bold"
+          className="mt-6 bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 px-4 w-full font-bold"
         >
           Back to Home Page
         </button>
