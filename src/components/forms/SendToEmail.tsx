@@ -115,14 +115,15 @@ export default function SendToEmail({ view, setView }: any) {
       txHash: transactionHashes[transactionHashes.length - 1],
     });
 
-    setLink(links[0]);
-    console.log(link);
+    const generatedPeanutLink = links[0];
+    setLink(generatedPeanutLink);
+    console.log(generatedPeanutLink);
 
     try {
       const response = await axios.post(
         `https://zend.swap2naira.com/api/v1/transaction/${address}`,
         {
-          link,
+          link: generatedPeanutLink,
           amount,
           token: "USDC (Base)",
           method: "email",
