@@ -131,7 +131,7 @@ export default function SendToEmail({ view, setView }: any) {
 
   return (
     <>
-      <form className="border mt-36 z-50 md:mt-0 w-full min-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+      <form className="border mt-36 z-50 md:mt-0 w-full max-w-[550px] md:min-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
       <div className="flex items-center justify-center gap-4 mb-5 w-full">
           <button
             onClick={() => setView("email")}
