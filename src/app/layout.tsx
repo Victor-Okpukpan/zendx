@@ -27,7 +27,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${bricolage.className} bg-gradient-to-b from-[#FAFAFA] to-[#E0E3F9] bg-no-repeat  dark:bg-gradient-to-tl dark:from-[#12056A] dark:via-[#09092E] dark:to-[#000617] relative overflow-hidden`}
+        className={`${bricolage.className} min-h-screen bg-gradient-to-b from-[#FAFAFA] to-[#E0E3F9] bg-no-repeat  dark:bg-gradient-to-tl dark:from-[#12056A] dark:via-[#09092E] dark:to-[#000617] relative`}
       >
         <Providers>
           <div className="dark:bg-grid-[#D0D5DD]/[0.04] md:dark:bg-grid-[#D0D5DD]/[0.06] h-full relative">

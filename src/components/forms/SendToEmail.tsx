@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import usdc from "../../../../assets/USDC.svg";
+import usdc from "../../assets/USDC.svg";
 import Image from "next/image";
 import { PayWithCoinbaseButton } from "@/components/buttons/PayWithCoinbaseButtob";
 import { TiArrowLeft } from "react-icons/ti";
@@ -130,15 +130,18 @@ export default function SendToEmail() {
   }
 
   return (
-    <main className="min-h-screen w-full flex items-start md:items-center justify-center  px-4 md:px-0">
-      <form className="border mt-36 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
+    <>
+      <form className="border mt-36 z-50 md:mt-0 w-full max-w-[550px] border-[#DFE1E6] dark:border-[#04308E] rounded-[10px] bg-white dark:bg-[#0B0B2F] pt-[22px] pb-[55px] px-10">
         {currentStep === 1 ? (
           <>
             <div className="text-right mb-4">
               <PayWithCoinbaseButton destinationWalletAddress={address} />
             </div>
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm">
+              <label
+                htmlFor=""
+                className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm"
+              >
                 Recipient's email address.
               </label>
               <input
@@ -150,7 +153,10 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm">
+              <label
+                htmlFor=""
+                className="text-[#667085] dark:text-[#EBF1FE] text-xs md:text-sm"
+              >
                 Enter the amount of Base USDC you wish to send.
               </label>
               <div className="border border-[#DFE1E6] rounded-[10px] py-[14px] px-4 flex items-center">
@@ -208,7 +214,10 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="" className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm">
+              <label
+                htmlFor=""
+                className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm"
+              >
                 Recipient's email address.
               </label>
               <p className="md:text-lg text-[#0C0D0E] dark:text-white font-semibold py-1">
@@ -217,7 +226,10 @@ export default function SendToEmail() {
             </div>
 
             <div className="mb-5">
-              <label htmlFor="" className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm">
+              <label
+                htmlFor=""
+                className="text-[#667085] dark:text-[#9C9D9E] text-xs md:text-sm"
+              >
                 You Sent
               </label>
               <div className="flex items-center gap-2">
@@ -237,7 +249,7 @@ export default function SendToEmail() {
               onClick={createLink}
               className={`bg-[#080065] dark:bg-[#04308E] text-white rounded-[16px] py-4 w-full font-bold mt-8`}
             >
-              {isLoading ? <Spinner />: "Confirm"}
+              {isLoading ? <Spinner /> : "Confirm"}
             </button>
           </>
         )}
@@ -260,6 +272,6 @@ export default function SendToEmail() {
           Back to Home Page
         </button>
       </Modal>
-    </main>
+    </>
   );
 }
