@@ -36,7 +36,7 @@ export default function WalletWrapper({
         >
           <Name className='text-white' />
         </ConnectWallet>
-        <WalletDropdown>
+        <WalletDropdown className='z-[51]'>
           <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick={true}>
             <Avatar />
             <Name />
