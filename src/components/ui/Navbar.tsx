@@ -16,7 +16,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <nav className="md:py-3 pt-8 bg-transparent z-50">
+    <nav className="md:py-3 pt-8 bg-transparent z-50 absolute top-0 right-0 left-0">
       <Wrapper>
         <div className="flex items-center justify-between w-full">
           <div className="w-max z-50">
