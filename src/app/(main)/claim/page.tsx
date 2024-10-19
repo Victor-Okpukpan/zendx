@@ -86,7 +86,7 @@ export default function ClaimPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen md:min-h-[90vh] w-full flex items-center justify-center">
+      <main className="min-h-screen w-full flex items-center justify-center">
         <div className=" z-50">
           <p className="text-[#667085] dark:text-white text-lg text-center mt-5 mb-8">
             Please wait while we verify the status of the link...
